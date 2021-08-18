@@ -1,7 +1,7 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
-import { toast } from 'react-toastify';
-import { api } from '../services/api';
-import { Product, Stock } from '../types';
+import { createContext, ReactNode, useContext, useState } from "react";
+import { toast } from "react-toastify";
+import { api } from "../services/api";
+import { Product, Stock } from "../types";
 
 interface CartProviderProps {
   children: ReactNode;
@@ -23,20 +23,37 @@ const CartContext = createContext<CartContextData>({} as CartContextData);
 
 export function CartProvider({ children }: CartProviderProps): JSX.Element {
   const [cart, setCart] = useState<Product[]>(() => {
-    // const storagedCart = Buscar dados do localStorage
+    const storagedCart = localStorage.getItem("@RocketShoes:cart");
 
-    // if (storagedCart) {
-    //   return JSON.parse(storagedCart);
-    // }
+    if (storagedCart) {
+      return JSON.parse(storagedCart);
+    }
 
     return [];
   });
 
+  const cartt = [
+    {
+      amount: 2,
+      id: 1,
+      image: "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg",
+      price: 179.9,
+      title: "Tênis de Caminhada Leve Confortável",
+    },
+    {
+      amount: 1,
+      id: 2,
+      image: "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis2.jpg",
+      price: 139.9,
+      title: "Tênis VR Caminhada Confortável Detalhes Couro Masculino",
+    },
+  ];
+
   const addProduct = async (productId: number) => {
     try {
-      // TODO
+      localStorage.setItem("@RocketShoes:cart", JSON.stringify(cartt));
     } catch {
-      // TODO
+      toast.error("Erro na adição do produto");
     }
   };
 
@@ -48,10 +65,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     }
   };
 
-  const updateProductAmount = async ({
-    productId,
-    amount,
-  }: UpdateProductAmount) => {
+  const updateProductAmount = async ({ productId, amount }: UpdateProductAmount) => {
     try {
       // TODO
     } catch {
@@ -60,9 +74,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
   };
 
   return (
-    <CartContext.Provider
-      value={{ cart, addProduct, removeProduct, updateProductAmount }}
-    >
+    <CartContext.Provider value={{ cart, addProduct, removeProduct, updateProductAmount }}>
       {children}
     </CartContext.Provider>
   );

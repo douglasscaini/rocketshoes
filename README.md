@@ -43,11 +43,9 @@ $ yarn test
 
 ## :triangular_flag_on_post: Desafio <a name="challenge"></a>
 
-> Aprender a manipular o Hook `useState`:
+> Aprimorar todos os conceitos envolvendo React.
 >
-> - Crie uma nova task com um id random. Não permita criar caso o título seja vazio.
-> - Altere entre `true` ou `false` o campo `isComplete` de uma task com dado id.
-> - Remova uma task da listagem pelo id.
+> - Total de 17 testes para conclusão do desafio.
 
 ## :heavy_check_mark: Tecnologias <a name="technologies"></a>
 
